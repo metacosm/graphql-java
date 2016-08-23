@@ -54,11 +54,14 @@ code {
 #navigation li a {
     padding-left: 10px;
     padding-right: 10px;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 
 #navigation .nav-header {
     padding-left: 0;
     padding-right: 0;
+    font-weight: bold;
 }
 
 body.rtl {
