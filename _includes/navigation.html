@@ -1,5 +1,5 @@
 <ul class="nav nav-list">
-    <li><a href="{{ site.github.url }}/">Home</a></li>
+    <li class="nav-header"><a href="https://github.com/graphql-java/graphql-java">Github Project</a></li>
     {% for section in site.sections %}
         {% assign attr = section[0] %}
         {% assign label = section[1] %}
@@ -13,7 +13,14 @@
     {% endfor %}
 <!-- List additional links. It is recommended to add a divider
     e.g. <li class="divider"></li> first to break up the content. -->
+    <li class="nav-header">Documentation</li>
+    <li><a href="https://github.com/graphql-java/graphql-java/blob/master/README.md#getting-started">Getting Started</a></li>
+    <li><a href="https://github.com/graphql-java/graphql-java/blob/master/README.md#schema-definition">Schema Definition</a></li>
+    <li><a href="https://github.com/graphql-java/graphql-java/blob/master/README.md#data-fetching">Data Fetching</a></li>
+    <li><a href="https://github.com/graphql-java/graphql-java/blob/master/README.md#executing">Execution</a></li>
+    <li><a href="https://github.com/graphql-java/graphql-java/blob/master/README.md#relay-support">Relay Support</a></li>
     <li class="nav-header">Releases</li>
+    <li><a href="https://github.com/graphql-java/graphql-java">latest</a></li>
     <li><a href="https://github.com/graphql-java/graphql-java/releases/tag/v2.0.0">2.0.0</a></li>
     <li><a href="https://github.com/graphql-java/graphql-java/releases/tag/v1.3">1.3</a></li>
     <li class="nav-header">Javadocs</li>
