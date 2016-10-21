@@ -4,27 +4,25 @@ package graphql.schema;
 import java.util.ArrayList;
 import java.util.List;
 
-import static graphql.Assert.*;
+import static graphql.Assert.assertNotEmpty;
+import static graphql.Assert.assertNotNull;
 
-public class GraphQLUnionType implements GraphQLType, GraphQLOutputType, GraphQLCompositeType, GraphQLUnmodifiedType, GraphQLNullableType {
+public class GraphQLUnionType extends AbstractGraphQLType implements GraphQLType, GraphQLOutputType,
+        GraphQLCompositeType,
+        GraphQLUnmodifiedType, GraphQLNullableType {
 
-    private final String name;
-    private final String description;
     private List<GraphQLObjectType> types = new ArrayList<GraphQLObjectType>();
     private final TypeResolver typeResolver;
 
 
     public GraphQLUnionType(String name, String description, List<GraphQLObjectType> types, TypeResolver typeResolver) {
-        assertNotNull(name, "name can't be null");
+        super(name, description);
         assertNotNull(types, "types can't be null");
         assertNotEmpty(types, "A Union type must define one or more member types.");
         assertNotNull(typeResolver, "typeResolver can't be null");
-        this.name = name;
-        this.description = description;
         this.types.addAll(types);
         this.typeResolver = typeResolver;
     }
-
 
     public List<GraphQLObjectType> getTypes() {
         return new ArrayList<GraphQLObjectType>(types);
@@ -32,15 +30,6 @@ public class GraphQLUnionType implements GraphQLType, GraphQLOutputType, GraphQL
 
     public TypeResolver getTypeResolver() {
         return typeResolver;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public static Builder newUnionType() {

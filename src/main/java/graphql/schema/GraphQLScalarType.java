@@ -3,30 +3,18 @@ package graphql.schema;
 
 import static graphql.Assert.assertNotNull;
 
-public class GraphQLScalarType implements GraphQLType, GraphQLInputType, GraphQLOutputType, GraphQLUnmodifiedType, GraphQLNullableType {
+public class GraphQLScalarType extends AbstractGraphQLType implements GraphQLType, GraphQLInputType, GraphQLOutputType,
+        GraphQLUnmodifiedType,
+        GraphQLNullableType {
 
-    private final String name;
-    private final String description;
     private final Coercing coercing;
 
 
     public GraphQLScalarType(String name, String description, Coercing coercing) {
-        assertNotNull(name, "name can't be null");
+        super(name, description);
         assertNotNull(coercing, "coercing can't be null");
-        this.name = name;
-        this.description = description;
         this.coercing = coercing;
     }
-
-    public String getName() {
-        return name;
-    }
-
-
-    public String getDescription() {
-        return description;
-    }
-
 
     public Coercing getCoercing() {
         return coercing;
@@ -35,8 +23,8 @@ public class GraphQLScalarType implements GraphQLType, GraphQLInputType, GraphQL
     @Override
     public String toString() {
         return "GraphQLScalarType{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
+                "name='" + getName() + '\'' +
+                ", description='" + getDescription() + '\'' +
                 ", coercing=" + coercing +
                 '}';
     }

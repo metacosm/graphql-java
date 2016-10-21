@@ -1,55 +1,19 @@
 package graphql.schema;
 
-import graphql.AssertException;
-
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import static graphql.Assert.assertNotNull;
 
-public class GraphQLInterfaceType implements GraphQLType, GraphQLOutputType, GraphQLFieldsContainer, GraphQLCompositeType, GraphQLUnmodifiedType, GraphQLNullableType {
+public class GraphQLInterfaceType extends AbstractGraphQLFieldsContainer implements GraphQLType, GraphQLOutputType,
+        GraphQLFieldsContainer, GraphQLCompositeType, GraphQLUnmodifiedType, GraphQLNullableType {
 
-    private final String name;
-    private final String description;
-    private final Map<String, GraphQLFieldDefinition> fieldDefinitionsByName = new LinkedHashMap<String, GraphQLFieldDefinition>();
     private final TypeResolver typeResolver;
 
     public GraphQLInterfaceType(String name, String description, List<GraphQLFieldDefinition> fieldDefinitions, TypeResolver typeResolver) {
-        assertNotNull(name, "name can't null");
+        super(name, description, fieldDefinitions);
         assertNotNull(typeResolver, "typeResolver can't null");
-        assertNotNull(fieldDefinitions, "fieldDefinitions can't null");
-        this.name = name;
-        this.description = description;
-        buildDefinitionMap(fieldDefinitions);
         this.typeResolver = typeResolver;
-    }
-
-    private void buildDefinitionMap(List<GraphQLFieldDefinition> fieldDefinitions) {
-        for (GraphQLFieldDefinition fieldDefinition : fieldDefinitions) {
-            String name = fieldDefinition.getName();
-            if (fieldDefinitionsByName.containsKey(name))
-                throw new AssertException("field " + name + " redefined");
-            fieldDefinitionsByName.put(name, fieldDefinition);
-        }
-    }
-
-    public GraphQLFieldDefinition getFieldDefinition(String name) {
-        return fieldDefinitionsByName.get(name);
-    }
-
-
-    public List<GraphQLFieldDefinition> getFieldDefinitions() {
-        return new ArrayList<GraphQLFieldDefinition>(fieldDefinitionsByName.values());
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public TypeResolver getTypeResolver() {
@@ -59,9 +23,9 @@ public class GraphQLInterfaceType implements GraphQLType, GraphQLOutputType, Gra
     @Override
     public String toString() {
         return "GraphQLInterfaceType{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", fieldDefinitionsByName=" + fieldDefinitionsByName +
+                "name='" + getName() + '\'' +
+                ", description='" + getDescription() + '\'' +
+                ", fieldDefinitionsByName=" + getFieldsMap() +
                 ", typeResolver=" + typeResolver +
                 '}';
     }

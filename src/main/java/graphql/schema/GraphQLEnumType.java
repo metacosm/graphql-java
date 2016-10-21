@@ -1,8 +1,8 @@
 package graphql.schema;
 
 
-import graphql.language.EnumValue;
 import graphql.AssertException;
+import graphql.language.EnumValue;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -11,10 +11,8 @@ import java.util.Map;
 
 import static graphql.Assert.assertNotNull;
 
-public class GraphQLEnumType implements GraphQLType, GraphQLInputType, GraphQLOutputType, GraphQLUnmodifiedType {
+public class GraphQLEnumType extends AbstractGraphQLType implements GraphQLInputType, GraphQLOutputType, GraphQLUnmodifiedType {
 
-    private final String name;
-    private final String description;
     private final Map<String, GraphQLEnumValueDefinition> valueDefinitionMap = new LinkedHashMap<String, GraphQLEnumValueDefinition>();
 
     private final Coercing coercing = new Coercing() {
@@ -63,9 +61,8 @@ public class GraphQLEnumType implements GraphQLType, GraphQLInputType, GraphQLOu
 
 
     public GraphQLEnumType(String name, String description, List<GraphQLEnumValueDefinition> values) {
+        super(description, name);
         assertNotNull(name, "name can't be null");
-        this.name = name;
-        this.description = description;
         buildMap(values);
     }
 
@@ -76,14 +73,6 @@ public class GraphQLEnumType implements GraphQLType, GraphQLInputType, GraphQLOu
                 throw new AssertException("value " + name + " redefined");
             valueDefinitionMap.put(name, valueDefinition);
         }
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
     }
 
     public Coercing getCoercing() {
