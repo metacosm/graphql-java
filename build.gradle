@@ -12,7 +12,7 @@ apply plugin: 'antlr'
 sourceCompatibility = 1.6
 targetCompatibility = 1.6
 def releaseVersion = System.properties.RELEASE_VERSION
-version = releaseVersion ? releaseVersion : '2.1.1-SNAPSHOT'
+version = releaseVersion ? releaseVersion : '2.2.0-jahia'
 group = 'com.graphql-java'
 
 
