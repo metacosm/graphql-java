@@ -9,7 +9,7 @@ public class AbstractGraphQLType implements GraphQLType {
     private final String name;
     private final String description;
 
-    AbstractGraphQLType(String description, String name) {
+    AbstractGraphQLType(String name, String description) {
         assertNotNull(name, "name can't be null");
         this.description = description;
         this.name = name;
