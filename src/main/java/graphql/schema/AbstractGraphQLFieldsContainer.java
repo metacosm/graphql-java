@@ -2,10 +2,7 @@ package graphql.schema;
 
 import graphql.AssertException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static graphql.Assert.assertNotNull;
 
@@ -18,7 +15,8 @@ public class AbstractGraphQLFieldsContainer extends AbstractGraphQLType implemen
     AbstractGraphQLFieldsContainer(String name, String description, List<GraphQLFieldDefinition> fieldDefinitions) {
         super(name, description);
         assertNotNull(fieldDefinitions, "fieldDefinitions can't be null");
-        this.fieldDefinitionsByName = new HashMap<String, GraphQLFieldDefinition>(fieldDefinitions.size());
+        this.fieldDefinitionsByName = new LinkedHashMap<String, GraphQLFieldDefinition>(fieldDefinitions.size());
+        buildDefinitionMap(fieldDefinitions);
     }
 
     private void buildDefinitionMap(List<GraphQLFieldDefinition> fieldDefinitions) {
